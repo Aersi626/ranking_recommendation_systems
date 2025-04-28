@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files
+data/*
+!data/.gitkeep   # keep the folder but ignore files
+
+# Model files
+models/*
+!models/.gitkeep  # keep the folder but ignore files
+
+# Docker
+*.log
+*.pid
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# System
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# YAML and Config
+config/config.yaml
+
+# Output artifacts
+*.sav
+*.pkl
+*.npy
+*.npz
+*.h5
+*.txt
+*.csv
+*.parquet
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Test cache
+.pytest_cache/
+
+# Uvicorn hot reload
+.hotreload/
+
+# Local .idea folder (for PyCharm users)
+.idea/
