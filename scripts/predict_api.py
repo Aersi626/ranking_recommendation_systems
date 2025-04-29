@@ -10,6 +10,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from src.utils import load_models, generate_recommendations
 from fastapi.responses import JSONResponse
+import pickle
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -38,6 +39,13 @@ def root():
 @app.get("/recommend")
 def recommend_instructions():
     return {"message": "Please send a POST request with JSON payload like {'user_id': 123, 'top_k': 10}"}
+
+@app.get("/sample_user_ids")
+def get_sample_user_ids(n: int = 10):
+    with open("models/user_encoder.pkl", "rb") as f:
+        encoder = pickle.load(f)
+    user_ids = encoder.classes_[:n]
+    return {"user_ids": user_ids.tolist()}
 
 @app.post("/recommend", response_model=RecommendResponse)
 async def recommend(request: RecommendRequest):
