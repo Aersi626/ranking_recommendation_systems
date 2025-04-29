@@ -9,6 +9,7 @@ Output: Top-K product recommendations
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from src.utils import load_models, generate_recommendations
+from fastapi.responses import JSONResponse
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -30,6 +31,14 @@ class RecommendResponse(BaseModel):
     user_id: int
     recommendations: list
 
+@app.get("/")
+def root():
+    return JSONResponse(content={"message": "Recommendation API is running! Use /recommend endpoint."})
+
+@app.get("/recommend")
+def recommend_instructions():
+    return {"message": "Please send a POST request with JSON payload like {'user_id': 123, 'top_k': 10}"}
+
 @app.post("/recommend", response_model=RecommendResponse)
 async def recommend(request: RecommendRequest):
     """
@@ -47,6 +56,8 @@ async def recommend(request: RecommendRequest):
         user_id=user_id,
         recommendations=recommendations
     )
+
+
 
 # Run server locally (for testing without docker-compose)
 if __name__ == "__main__":
