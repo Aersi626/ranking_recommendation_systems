@@ -53,7 +53,7 @@ def train_cb_model(item_properties_path='./data/item_properties_part1.csv',
 
     # # One-hot encode item features
     item_metadata = item_metadata.applymap(str)  # Ensure all features are strings
-    encoder = OneHotEncoder(handle_unknown='ignore', sparse=True)
+    encoder = OneHotEncoder(handle_unknown='ignore', sparse_output=True)
     item_features = encoder.fit_transform(item_metadata)
 
     # item features could be huge
