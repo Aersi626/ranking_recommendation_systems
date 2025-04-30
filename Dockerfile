@@ -4,6 +4,9 @@ FROM python:3.10-slim
 # Set working directory inside the container
 WORKDIR /app
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y libgomp1
+
 # Install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
